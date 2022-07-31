@@ -1,0 +1,19 @@
+$base-spacing: 8px;
+
+$spacing-map: (
+  xxs: calc($base-spacing / 2),
+  xs: $base-spacing,
+  sm: calc($base-spacing * 2),
+  md: calc($base-spacing * 3),
+  lg: calc($base-spacing * 4),
+  xl: calc($base-spacing * 5),
+  xxl: calc($base-spacing * 6),
+);
+
+:root {
+  --base-spacing: #{$base-spacing};
+
+  @each $key, $value in $spacing-map {
+    --spacing-#{$key}: #{$value};
+  }
+}

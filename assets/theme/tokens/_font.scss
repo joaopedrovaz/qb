@@ -1,0 +1,29 @@
+$font-family: 'Red Hat Text', sans-serif;
+
+$font-size: (
+  title: 2.25rem,
+  subtitle: 1.5rem,
+  large: 1rem,
+  body1: 0.875rem,
+  body2: 0.75rem,
+);
+
+$font-weight: (
+  title: 700,
+  subtitle: 700,
+  large: 400,
+  body1: 400,
+  body2: 400,
+);
+
+:root {
+  --font-family: #{$font-family};
+
+  @each $key, $value in $font-size {
+    --font-size-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $font-weight {
+    --font-weight-#{$key}: #{$value};
+  }
+}

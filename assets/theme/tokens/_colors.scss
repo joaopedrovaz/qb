@@ -1,0 +1,45 @@
+$_color-primary: (
+  main: #18ACC4,
+  dark: #007A8D,
+);
+
+$_color-secondary: (
+  main: #FDCB13,
+  dark: #DE9E1F,
+);
+
+$_color-status: (
+  success: #0FA866,
+  error: #E84855,
+);
+
+$_color-text: (
+  primary: #1F2D30,
+);
+
+$_color-background: (
+  main: #FBFBFB,
+  overlay: rgba(31, 45, 48, 0.8),
+);
+
+:root {
+  @each $key, $value in $_color-primary {
+    --color-primary-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $_color-secondary {
+    --color-secondary-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $_color-status {
+    --color-status-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $_color-text {
+    --color-text-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $_color-background {
+    --color-background-#{$key}: #{$value};
+  }
+}
