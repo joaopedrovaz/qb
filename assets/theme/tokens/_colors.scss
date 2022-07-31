@@ -32,7 +32,7 @@ $_color-background: (
   }
 
   @each $key, $value in $_color-status {
-    --color-status-#{$key}: #{$value};
+    --color-#{$key}: #{$value};
   }
 
   @each $key, $value in $_color-text {
