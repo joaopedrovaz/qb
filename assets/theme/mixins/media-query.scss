@@ -1,0 +1,10 @@
+@use "sass:map";
+@use '../tokens/screens' as screen;
+
+@mixin media-query($breakpoint) {
+  $screen-size: map-get(screen.$grid-breakpoints, $breakpoint);
+
+  @media (min-width: $screen-size) {
+    @content;
+  }
+}
