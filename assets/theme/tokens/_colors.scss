@@ -22,6 +22,11 @@ $_color-background: (
   overlay: rgba(31, 45, 48, 0.8),
 );
 
+$_color-common: (
+  white: #FFFFFF,
+  black: #000000,
+);
+
 :root {
   @each $key, $value in $_color-primary {
     --color-primary-#{$key}: #{$value};
@@ -41,5 +46,10 @@ $_color-background: (
 
   @each $key, $value in $_color-background {
     --color-background-#{$key}: #{$value};
+  }
+
+  @each $key, $value in $_color-common {
+    // sass bullshit
+    --color-common-#{"" + $key}: #{$value};
   }
 }
