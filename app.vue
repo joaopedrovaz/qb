@@ -1,11 +1,13 @@
 <template>
   <div>
-    <QTypography>
-      Hello, World.
-    </QTypography>
+    <QHeader />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import './assets/theme/index.scss';
+
+// useHead({
+//   title: 'Bolsas favoritas',
+// });
 </script>

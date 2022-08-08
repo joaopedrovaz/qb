@@ -20,6 +20,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 defineProps({
   actions: {
     type: Array<{ label: string; onActive?: () => void }>,
