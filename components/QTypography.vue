@@ -6,6 +6,7 @@
       'q-typography--bold': bold,
       [`q-typography--${variant}`]: variant,
       [`q-typography--${color}`]: color,
+      [`q-typography--align-${textAlign}`]: textAlign,
     }"
   >
     <slot />
@@ -19,6 +20,13 @@ const fontVariants = [
   'large',
   'body1',
   'body2',
+];
+
+const textAlign = [
+  'left',
+  'center',
+  'right',
+  'justify',
 ];
 
 const themeColors = [
@@ -51,6 +59,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    textAlign: {
+      type: String,
+      default: '',
+      validator: (value) => textAlign.includes(value),
+    },
   },
 };
 </script>
@@ -72,6 +85,13 @@ $theme-colors: (
   'secondary-main',
   'success',
   'error',
+);
+
+$text-align: (
+  'left',
+  'center',
+  'right',
+  'justify',
 );
 
 .q-typography {
@@ -96,6 +116,12 @@ $theme-colors: (
       } @else {
         color: var(--color-#{$color});
       }
+    }
+  }
+
+  @each $align in $text-align {
+    &.q-typography--align-#{$align} {
+      text-align: #{$align};
     }
   }
 
