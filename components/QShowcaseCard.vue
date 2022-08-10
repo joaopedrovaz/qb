@@ -129,9 +129,6 @@ const handleOnSeeMore = () => emit('seeMore');
 $border: 2px solid #eee;
 
 .q-showcase-card {
-  width: 310px;
-  height: 480px;
-
   .q-showcase-card__content {
     align-items: center;
     display: flex;
