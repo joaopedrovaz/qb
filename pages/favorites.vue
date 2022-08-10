@@ -17,7 +17,10 @@
     />
 
     <div class="q-favorites__container">
-      <QAddFavoriteCard class="q-favorites__add-car" />
+      <QAddFavoriteCard
+        class="q-favorites__add-car"
+        @click="openModal"
+      />
 
       <QShowcaseCard
         v-for="(vacancy, index) in vacancies"
@@ -36,10 +39,17 @@
         @see-more="onSeeMore"
       />
     </div>
+
+    <QCoursesModal
+      :open="isModalOpen"
+      @close="closeModal"
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 const filterList = [
   { label: 'Todos os semestres' },
   { label: '2º semestre de 2019' },
@@ -56,6 +66,15 @@ const onSeeMore = () => {
 
 // eslint-disable-next-line no-undef
 const { data: vacancies } = useFetchVacancies();
+
+const isModalOpen = ref(false);
+const openModal = () => {
+  isModalOpen.value = true;
+};
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
 
 // useHead({
 //   title: 'Bolsas favoritas',
