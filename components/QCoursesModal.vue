@@ -16,7 +16,33 @@
       <div
         class="q-courses-modal__card"
       >
-        modal works!
+        <div class="q-courses-modal__header">
+          <QTypography variant="subtitle">
+            Adicionar bolsa
+          </QTypography>
+
+          <QTypography>
+            Filtre e adicione as bolsas de seu interesse.
+          </QTypography>
+        </div>
+
+        <div class="q-courses-modal__fields">
+          <QComboBox
+            class="q-courses-modal__select-field"
+            label="Selecione sua cidade"
+            :options="[
+              { label: 'São José dos Campos', value: 'SJC' }
+            ]"
+          />
+
+          <QComboBox
+            class="q-courses-modal__select-field"
+            label="Selecione o curso de sua preferência"
+            :options="[
+              { label: 'Arquitetura e urbanismo', value: 1 }
+            ]"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -84,6 +110,16 @@ onUpdated(() => {
       height: calc(100% - 64px);
       padding: var(--spacing-md) var(--spacing-sm);
       width: 100%;
+
+      .q-courses-modal__header {
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .q-courses-modal__fields {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
     }
   }
 
@@ -92,6 +128,17 @@ onUpdated(() => {
       .q-courses-modal__close-icon {
         margin-right: 0;
         margin-bottom: var(--spacing-xxs);
+      }
+
+      .q-courses-modal__card {
+        .q-courses-modal__fields {
+          flex-direction: row;
+          flex-wrap: wrap;
+
+          .q-courses-modal__select-field {
+            flex: 1;
+          }
+        }
       }
     }
   }
