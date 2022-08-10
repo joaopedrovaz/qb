@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .eslintrc.js",
-    "api": "json-server --watch db.json --port 3001"
+    "start:api": "json-server --watch db.json --port 3001"
   },
   "browserslist": [
     "cover 99.5%"

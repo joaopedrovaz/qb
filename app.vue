@@ -1,6 +1,7 @@
 <template>
   <div>
     <QHeader />
+    <NuxtPage />
   </div>
 </template>
 
