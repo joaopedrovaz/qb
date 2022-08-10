@@ -135,7 +135,11 @@ $max-width: map-get(screen.$grid-breakpoints, 'lg');
 .q-header {
   display: flex;
   flex-direction: column;
+  left: 0;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 1;
 
   .q-header__main {
     background-color: var(--color-common-white);

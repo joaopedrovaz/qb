@@ -67,7 +67,7 @@ const { data: vacancies } = useFetchVacancies();
 @use '../assets/theme/tokens/screens' as screen;
 .q-favorites {
   padding: var(--spacing-sm);
-  margin: 0 auto;
+  margin: 140px auto 0;
   max-width: map-get(screen.$grid-breakpoints, 'lg');
   width: 100%;
 
@@ -99,6 +99,8 @@ const { data: vacancies } = useFetchVacancies();
   }
 
   @include mq.media-query('lg') {
+    margin-top: 128px;
+
     .q-favorites__container {
       justify-content: space-between;
     }
