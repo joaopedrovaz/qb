@@ -1,10 +1,22 @@
 <template>
-  <div class="q-card">
+  <component
+    :is="component"
+    class="q-card"
+  >
     <div class="q-card__content">
       <slot />
     </div>
-  </div>
+  </component>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  component: {
+    type: String,
+    default: 'div',
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 @use '../assets/theme/mixins/media-query' as mq;

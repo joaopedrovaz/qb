@@ -28,7 +28,7 @@ defineProps({
   border-radius: 4px;
   border: 1px solid;
   cursor: pointer;
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-body1);
   font-weight: 700;
   padding: var(--spacing-sm) var(--spacing-md);
 

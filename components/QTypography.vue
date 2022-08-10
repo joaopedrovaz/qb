@@ -22,7 +22,7 @@ const fontVariants = [
   'body2',
 ];
 
-const textAlign = [
+const textAlignList = [
   'left',
   'center',
   'right',
@@ -62,7 +62,7 @@ export default {
     textAlign: {
       type: String,
       default: '',
-      validator: (value) => textAlign.includes(value),
+      validator: (value) => !value || textAlignList.includes(value),
     },
   },
 };

@@ -2,6 +2,7 @@
   <div class="q-rating">
     <QTypography
       class="q-rating__label"
+      variant="large"
       bold
     >
       {{ formattedRating }}
@@ -68,6 +69,7 @@ const stars = computed(() => {
 
   .q-rating__icon {
     color: var(--color-secondary-main);
+    font-size: var(--font-size-large);
   }
 }
 </style>
