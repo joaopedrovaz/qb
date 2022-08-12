@@ -43,6 +43,8 @@
             ]"
           />
         </div>
+
+        <QListingCourses />
       </div>
     </div>
   </div>
@@ -119,6 +121,7 @@ onUpdated(() => {
         display: flex;
         flex-direction: column;
         gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
       }
     }
   }
