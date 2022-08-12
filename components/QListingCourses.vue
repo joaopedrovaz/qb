@@ -108,7 +108,6 @@ $border: 2px solid #eee;
   list-style: none;
   margin: 0;
   max-height: 100%;
-  overflow-y: auto;
   padding: 0;
 
   .q-listing-courses__item {

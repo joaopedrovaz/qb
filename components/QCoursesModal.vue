@@ -45,9 +45,26 @@
         </div>
 
         <QListingCourses
+          class="q-courses-modal__listing-courses"
           :selected-vacancies="['1', '3']"
           @change="handleOnChange"
         />
+
+        <div class="q-courses-modal__footer">
+          <QButton
+            class="q-courses-modal__button"
+            @click="handleOnClose"
+          >
+            Cancelar
+          </QButton>
+          <QButton
+            class="q-courses-modal__button"
+            variant="contained"
+            @click="handleOnClose"
+          >
+            Adicionar bolsa(s)
+          </QButton>
+        </div>
       </div>
     </div>
   </div>
@@ -101,6 +118,7 @@ onUpdated(() => {
   .q-courses-modal__wrapper {
     height: 100%;
     max-width: 640px;
+    overflow-y: auto;
     width: 100%;
 
     .q-courses-modal__close-icon {
@@ -114,10 +132,9 @@ onUpdated(() => {
     .q-courses-modal__card {
       background-color: var(--color-common-white);
       box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-      height: calc(100% - 64px);
+      overflow-y: auto;
       padding: var(--spacing-md) var(--spacing-sm);
       width: 100%;
-      overflow: hidden;
 
       .q-courses-modal__header {
         margin-bottom: var(--spacing-xl);
@@ -129,17 +146,26 @@ onUpdated(() => {
         gap: var(--spacing-md);
         margin-bottom: var(--spacing-lg);
       }
+
+      .q-courses-modal__footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: var(--spacing-lg);
+      }
     }
   }
 
   @include mq.media-query('lg') {
     .q-courses-modal__wrapper {
+      overflow-y: hidden;
+
       .q-courses-modal__close-icon {
         margin-right: 0;
         margin-bottom: var(--spacing-xxs);
       }
 
       .q-courses-modal__card {
+        height: 640px;
         .q-courses-modal__fields {
           flex-direction: row;
           flex-wrap: wrap;
@@ -147,6 +173,16 @@ onUpdated(() => {
           .q-courses-modal__select-field {
             flex: 1;
           }
+        }
+
+        .q-courses-modal__listing-courses {
+          height: 300px;
+          overflow-y: auto;
+        }
+
+        .q-courses-modal__footer {
+          gap: var(--spacing-sm);
+          justify-content: flex-end;
         }
       }
     }
