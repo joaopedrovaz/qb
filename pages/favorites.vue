@@ -14,6 +14,7 @@
     <QGroupButton
       class="q-favorites__group-button"
       :actions="filterList"
+      @select="setSelectedSemester"
     />
 
     <div class="q-favorites__container">
@@ -65,9 +66,13 @@ const onSeeMore = () => {
 };
 
 const favoriteVacancies = ref<string[]>([]);
+const selectedSemester = ref<string>(undefined);
 
 // eslint-disable-next-line no-undef
-const filters = computed(() => queryString.stringify({ id: favoriteVacancies.value}));
+const filters = computed(() => queryString.stringify({
+  id: favoriteVacancies.value,
+  enrollment_semester: selectedSemester.value,
+}));
 
 // eslint-disable-next-line no-undef
 const { result } = useFetchVacancies(filters);
@@ -76,6 +81,11 @@ const vacanciesData = computed(() => favoriteVacancies.value.length > 0 && resul
 
 const setFavoriteVacancies = (vacancies: string[]) => {
   favoriteVacancies.value = vacancies;
+};
+
+const setSelectedSemester = (semester: number) => {
+  const semesterList = [undefined, '2019.2', '2020.1'];
+  selectedSemester.value = semesterList[semester];
 };
 
 const isModalOpen = ref(false);

@@ -33,7 +33,7 @@ defineProps({
 
 const emit = defineEmits(['select']);
 
-const activeIndex = ref(null);
+const activeIndex = ref(0);
 
 const handleOnClick = (index: number, cb?: () => void) => {
   activeIndex.value = index;
