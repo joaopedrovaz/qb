@@ -1,12 +1,16 @@
 <template>
   <ul class="q-listing-courses">
-    <li class="q-listing-courses__item">
+    <li
+      v-for="(vacancy, index) in vacanciesData"
+      :key="index"
+      class="q-listing-courses__item"
+    >
       <input type="checkbox">
 
       <div class="q-listing-courses__item-content">
         <img
-          src="https://www.tryimg.com/u/2019/04/16/unip.png"
-          alt=""
+          :src="vacancy.university.logo_url"
+          :alt="vacancy.university.name"
           class="q-listing-courses__university-logo"
         >
 
@@ -17,11 +21,11 @@
               color="primary-dark"
               bold
             >
-              Administração
+              {{ vacancy.course.shift }}
             </QTypography>
 
             <QTypography variant="body2">
-              Bacharelado
+              {{ vacancy.course.kind }}
             </QTypography>
           </div>
 
@@ -33,7 +37,7 @@
                 bold
                 component="span"
               >
-                50%
+                {{ vacancy.discount_percentage }}%
               </QTypography>
             </QTypography>
 
@@ -41,7 +45,7 @@
               bold
               color="success"
             >
-              R$ 374/mês
+              R$ {{ vacancy.price_with_discount }}/mês
             </QTypography>
           </div>
         </div>
@@ -51,6 +55,8 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line no-undef
+const { data: vacanciesData } = useFetchVacancies();
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +67,8 @@ $border: 2px solid #eee;
 .q-listing-courses {
   list-style: none;
   margin: 0;
+  max-height: 100%;
+  overflow-y: auto;
   padding: 0;
 
   .q-listing-courses__item {
@@ -80,6 +88,7 @@ $border: 2px solid #eee;
       width: 100%;
 
       img.q-listing-courses__university-logo {
+        object-fit: contain;
         width: 80px;
       }
 
@@ -110,6 +119,7 @@ $border: 2px solid #eee;
 
         img.q-listing-courses__university-logo {
           width: 120px;
+          height: 32px;
         }
 
         .q-listing-courses__item-info {

@@ -112,6 +112,7 @@ onUpdated(() => {
       height: calc(100% - 64px);
       padding: var(--spacing-md) var(--spacing-sm);
       width: 100%;
+      overflow: hidden;
 
       .q-courses-modal__header {
         margin-bottom: var(--spacing-xl);
