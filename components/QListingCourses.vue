@@ -59,16 +59,29 @@
 </template>
 
 <script lang="ts" setup>
+import queryString from 'query-string';
+
 const props = defineProps({
   selectedVacancies: {
     type: Array,
     default: () => [],
     validator: (value: string[]) => value.every((vacancyId: unknown) => typeof vacancyId === 'string'),
   },
+  sort: {
+    type: String,
+    default: 'asc',
+    validator: (value: string) => ['asc', 'desc'].includes(value),
+  },
 });
 
 // eslint-disable-next-line no-undef
-const { result: vacanciesData } = useFetchVacancies();
+const filters = computed(() => queryString.stringify({
+  _sort: 'university.name',
+  _order: props.sort,
+}));
+
+// eslint-disable-next-line no-undef
+const { result: vacanciesData } = useFetchVacancies(filters);
 
 const emit = defineEmits(['change']);
 // eslint-disable-next-line no-undef
@@ -122,7 +135,7 @@ $border: 2px solid #eee;
     .q-listing-courses__item-content {
       align-items: center;
       display: flex;
-      justify-content: space-between;
+      gap: var(--spacing-md);
       padding: var(--spacing-sm);
       width: 100%;
 

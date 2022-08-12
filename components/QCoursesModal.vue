@@ -44,9 +44,41 @@
           />
         </div>
 
+        <div class="q-courses-modal__table-header">
+          <QTypography
+            bold
+            variant="large"
+          >
+            Resultado:
+          </QTypography>
+
+          <div class="q-courses-modal__sort-field">
+            <QTypography
+              bold
+              variant="large"
+              text-align="right"
+            >
+              Ordenar por
+            </QTypography>
+
+            <QTypography
+              bold
+              variant="large"
+              text-align="right"
+              color="primary-dark"
+              @click="handleSort"
+            >
+              Nome da Faculdade
+
+              <font-awesome-icon :icon="`fa-solid ${ascSort ? 'fa-angle-down' : 'fa-angle-up'}`" />
+            </QTypography>
+          </div>
+        </div>
+
         <QListingCourses
           class="q-courses-modal__listing-courses"
           :selected-vacancies="selectedVacancies"
+          :sort="ascSort ? 'asc' : 'desc'"
           @change="handleOnChange"
         />
 
@@ -74,11 +106,11 @@
 <script lang="ts" setup>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { getStorage, setStorage } from '~~/utils/localStorage';
 import { StorageKeys } from '~~/types/StorageKeys';
 
-library.add(faXmark);
+library.add(faXmark, faAngleDown, faAngleUp);
 
 const props = defineProps({
   open: {
@@ -89,8 +121,14 @@ const props = defineProps({
 
 // eslint-disable-next-line no-undef
 const selectedVacancies = ref<string[]>([]);
+// eslint-disable-next-line no-undef
+const ascSort = ref(true);
 
 const emit = defineEmits(['close', 'save']);
+
+const handleSort = () => {
+  ascSort.value = !ascSort.value;
+};
 
 const handleOnClose = () => emit('close');
 
@@ -178,6 +216,21 @@ onMounted(() => {
         margin-bottom: var(--spacing-lg);
       }
 
+      .q-courses-modal__table-header {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-sm);
+
+        .q-courses-modal__sort-field {
+          align-items: flex-end;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+
       .q-courses-modal__footer {
         display: flex;
         justify-content: space-between;
@@ -207,7 +260,7 @@ onMounted(() => {
         }
 
         .q-courses-modal__listing-courses {
-          height: 300px;
+          height: 256px;
           overflow-y: auto;
         }
 
