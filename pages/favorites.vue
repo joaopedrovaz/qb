@@ -23,7 +23,7 @@
       />
 
       <QShowcaseCard
-        v-for="(vacancy, index) in vacancies"
+        v-for="(vacancy, index) in vacanciesData"
         :key="index"
         class="q-favorites__card"
         :university-logo="vacancy.university.logo_url"
@@ -35,7 +35,7 @@
         :rating="vacancy.university.score"
         :old-price="vacancy.full_price"
         :price="vacancy.price_with_discount"
-        @delete="onDelete"
+        @delete="handleOnDelete(vacancy.id)"
         @see-more="onSeeMore"
       />
     </div>
@@ -43,12 +43,16 @@
     <QCoursesModal
       :open="isModalOpen"
       @close="closeModal"
+      @save="setFavoriteVacancies"
     />
   </section>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import queryString from 'query-string';
+import { StorageKeys } from '~~/types/StorageKeys';
+import { getStorage, setStorage } from '~~/utils/localStorage';
 
 const filterList = [
   { label: 'Todos os semestres' },
@@ -56,16 +60,23 @@ const filterList = [
   { label: ' 1º semestre de 2020' },
 ];
 
-const onDelete = () => {
-  console.log('delete');
-};
-
 const onSeeMore = () => {
   console.log('see more');
 };
 
+const favoriteVacancies = ref<string[]>([]);
+
 // eslint-disable-next-line no-undef
-const { data: vacancies } = useFetchVacancies();
+const filters = computed(() => queryString.stringify({ id: favoriteVacancies.value}));
+
+// eslint-disable-next-line no-undef
+const { result } = useFetchVacancies(filters);
+// eslint-disable-next-line no-undef
+const vacanciesData = computed(() => favoriteVacancies.value.length > 0 && result.value);
+
+const setFavoriteVacancies = (vacancies: string[]) => {
+  favoriteVacancies.value = vacancies;
+};
 
 const isModalOpen = ref(false);
 const openModal = () => {
@@ -74,11 +85,21 @@ const openModal = () => {
 const closeModal = () => {
   isModalOpen.value = false;
 };
+const handleOnDelete = (id: string) => {
+  const filteredArr = favoriteVacancies.value.filter((vacancy) => vacancy !== id);
+  favoriteVacancies.value = filteredArr;
+  setStorage(StorageKeys.FAVORITES, filteredArr, 'vacancyList');
+};
 
+// eslint-disable-next-line no-undef
+onMounted(() => {
+  favoriteVacancies.value = getStorage<string[]>(StorageKeys.FAVORITES, 'vacancyList') || [];
+});
 
-// useHead({
-//   title: 'Bolsas favoritas',
-// });
+// eslint-disable-next-line no-undef
+useHead({
+  title: 'Bolsas favoritas',
+});
 </script>
 
 <style lang="scss" scoped>
@@ -121,7 +142,7 @@ const closeModal = () => {
     margin-top: 128px;
 
     .q-favorites__container {
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .q-favorites__group-button {

@@ -89,7 +89,7 @@ const props = defineProps({
 // eslint-disable-next-line no-undef
 const selectedVacancies = ref<string[]>([]);
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'save']);
 
 const handleOnClose = () => emit('close');
 
@@ -107,6 +107,7 @@ const initSelectVacancies = () => {
 
 const onSaveFavoriteVacancies = () => {
   setStorage(StorageKeys.FAVORITES, selectedVacancies.value, 'vacancyList');
+  emit('save', selectedVacancies.value);
   handleOnClose();
 };
 

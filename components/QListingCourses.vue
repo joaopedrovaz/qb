@@ -68,7 +68,7 @@ const props = defineProps({
 });
 
 // eslint-disable-next-line no-undef
-const { data: vacanciesData } = useFetchVacancies();
+const { result: vacanciesData } = useFetchVacancies();
 
 const emit = defineEmits(['change']);
 // eslint-disable-next-line no-undef
