@@ -60,6 +60,7 @@
           <QButton
             class="q-courses-modal__button"
             variant="contained"
+            :disabled="isSaveDisabled"
             @click="onSaveFavoriteVacancies"
           >
             Adicionar bolsa(s)
@@ -110,6 +111,9 @@ const onSaveFavoriteVacancies = () => {
   emit('save', selectedVacancies.value);
   handleOnClose();
 };
+
+// eslint-disable-next-line no-undef
+const isSaveDisabled = computed(() => selectedVacancies.value.length <= 0);
 
 // eslint-disable-next-line no-undef
 onUpdated(() => {

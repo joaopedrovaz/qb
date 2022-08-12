@@ -4,6 +4,7 @@
       'q-button': true,
       [`q-button--${variant}`]: variant
     }"
+    :disabled="disabled"
   >
     <slot />
   </button>
@@ -18,6 +19,10 @@ defineProps({
       'default',
       'contained',
     ].includes(value),
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
@@ -44,6 +49,16 @@ defineProps({
     background-color: var(--color-secondary-main);
     border-color: var(--color-secondary-dark);
     color: var(--color-text-primary);
+  }
+
+  &:disabled {
+    background-color: #cbcdce;
+    border-color: #aeb3b4;
+    cursor: not-allowed;
+
+    &:hover {
+      filter: none;
+    }
   }
 }
 </style>
