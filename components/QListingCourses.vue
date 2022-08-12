@@ -25,7 +25,7 @@
               color="primary-dark"
               bold
             >
-              {{ vacancy.course.shift }}
+              {{ vacancy.course.name }}
             </QTypography>
 
             <QTypography variant="body2">
