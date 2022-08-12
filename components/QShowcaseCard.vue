@@ -69,9 +69,10 @@
 
         <QButton
           variant="contained"
+          :disabled="disabled"
           @click="handleOnSeeMore"
         >
-          Ver oferta
+          {{ disabled ? 'Indisponível' : 'Ver oferta' }}
         </QButton>
       </div>
     </div>
@@ -116,6 +117,10 @@ defineProps({
   price: {
     type: Number,
     required: true,
+  },
+  disabled: {
+    type: Boolean,
+    default: true,
   },
 });
 

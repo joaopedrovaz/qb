@@ -36,6 +36,7 @@
         :rating="vacancy.university.score"
         :old-price="vacancy.full_price"
         :price="vacancy.price_with_discount"
+        :disabled="!vacancy.enabled"
         @delete="handleOnDelete(vacancy.id)"
         @see-more="onSeeMore"
       />
