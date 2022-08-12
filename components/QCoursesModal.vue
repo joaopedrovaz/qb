@@ -46,7 +46,7 @@
 
         <QListingCourses
           class="q-courses-modal__listing-courses"
-          :selected-vacancies="['1', '3']"
+          :selected-vacancies="selectedVacancies"
           @change="handleOnChange"
         />
 
@@ -60,7 +60,7 @@
           <QButton
             class="q-courses-modal__button"
             variant="contained"
-            @click="handleOnClose"
+            @click="onSaveFavoriteVacancies"
           >
             Adicionar bolsa(s)
           </QButton>
@@ -74,6 +74,8 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { getStorage, setStorage } from '~~/utils/localStorage';
+import { StorageKeys } from '~~/types/StorageKeys';
 
 library.add(faXmark);
 
@@ -84,19 +86,43 @@ const props = defineProps({
   },
 });
 
+// eslint-disable-next-line no-undef
+const selectedVacancies = ref<string[]>([]);
+
 const emit = defineEmits(['close']);
 
 const handleOnClose = () => emit('close');
 
-const handleOnChange = (selectedVacancies: string[]) => console.log(selectedVacancies);
+const handleOnChange = (value: string[]) => {
+  selectedVacancies.value = value;
+};
+
+const initSelectVacancies = () => {
+  const storage = getStorage<string[]>(StorageKeys.FAVORITES, 'vacancyList');
+
+  if (storage) {
+    selectedVacancies.value = storage;
+  }
+};
+
+const onSaveFavoriteVacancies = () => {
+  setStorage(StorageKeys.FAVORITES, selectedVacancies.value, 'vacancyList');
+  handleOnClose();
+};
 
 // eslint-disable-next-line no-undef
 onUpdated(() => {
   if (props.open) {
     document.body.style.overflow = 'hidden';
   } else {
+    initSelectVacancies();
     document.body.style.overflow = 'auto';
   }
+});
+
+// eslint-disable-next-line no-undef
+onMounted(() => {
+  initSelectVacancies();
 });
 </script>
 
