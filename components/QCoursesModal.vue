@@ -44,7 +44,10 @@
           />
         </div>
 
-        <QListingCourses />
+        <QListingCourses
+          :selected-vacancies="['1', '3']"
+          @change="handleOnChange"
+        />
       </div>
     </div>
   </div>
@@ -67,6 +70,8 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const handleOnClose = () => emit('close');
+
+const handleOnChange = (selectedVacancies: string[]) => console.log(selectedVacancies);
 
 // eslint-disable-next-line no-undef
 onUpdated(() => {

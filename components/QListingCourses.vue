@@ -5,7 +5,11 @@
       :key="index"
       class="q-listing-courses__item"
     >
-      <input type="checkbox">
+      <input
+        type="checkbox"
+        :checked="getIsChecked(vacancy.id)"
+        @change="handleOnChange($event, vacancy.id)"
+      >
 
       <div class="q-listing-courses__item-content">
         <img
@@ -55,8 +59,44 @@
 </template>
 
 <script lang="ts" setup>
+const props = defineProps({
+  selectedVacancies: {
+    type: Array,
+    default: () => [],
+    validator: (value: string[]) => value.every((vacancyId: unknown) => typeof vacancyId === 'string'),
+  },
+});
+
 // eslint-disable-next-line no-undef
 const { data: vacanciesData } = useFetchVacancies();
+
+const emit = defineEmits(['change']);
+// eslint-disable-next-line no-undef
+const selectedVacancies = ref(props.selectedVacancies);
+
+const addItem = (id: string) => {
+  selectedVacancies.value.push(id);
+};
+
+const removeItem = (id: string) => {
+  selectedVacancies.value = selectedVacancies.value.filter(item => item !== id);
+};
+
+const getIsChecked = (id: string) => {
+  return selectedVacancies.value.includes(id);
+};
+
+const handleOnChange = (evt: Event, id: string) => {
+  const isChecked = (evt.target as HTMLInputElement).checked;
+
+  if (isChecked) {
+    addItem(id);
+  } else {
+    removeItem(id);
+  }
+
+  emit('change', selectedVacancies.value);
+};
 </script>
 
 <style lang="scss" scoped>
