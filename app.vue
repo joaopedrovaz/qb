@@ -1,7 +1,9 @@
 <template>
   <div>
-    <QHeader />
-    <NuxtPage />
+    <ClientOnly>
+      <QHeader />
+      <NuxtPage />
+    </ClientOnly>
   </div>
 </template>
 
