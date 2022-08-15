@@ -31,16 +31,38 @@
             class="q-courses-modal__select-field"
             label="Selecione sua cidade"
             :options="[
-              { label: 'São José dos Campos', value: 'SJC' }
+              { label: undefined, value: undefined },
+              { label: 'São Paulo', value: 'São Paulo' },
+              { label: 'São José dos Campos', value: 'São José dos Campos' },
+              { label: 'Fortaleza', value: 'Fortaleza' },
+              { label: 'Jacareí', value: 'Jacareí' },
             ]"
+            @change="handleOnSelectCity"
           />
 
           <QComboBox
             class="q-courses-modal__select-field"
             label="Selecione o curso de sua preferência"
             :options="[
-              { label: 'Arquitetura e urbanismo', value: 1 }
+              { label: undefined, value: undefined },
+              { label: 'Administração', value: 'Administração' },
+              { label: 'Arquitetura e urbanismo', value: 'Arquitetura e urbanismo' },
+              { label: 'Biomedicina', value: 'Biomedicina' },
+              { label: 'Ciência da Computação', value: 'Ciência da Computação' },
+              { label: 'Ciências Econômicas', value: 'Ciências Econômicas' },
+              { label: 'Educação Física', value: 'Educação Física' },
+              { label: 'Engenharia Mecânica', value: 'Engenharia Mecânica' },
+              { label: 'Farmácia', value: 'Farmácia' },
+              { label: 'Gastronomia', value: 'Gastronomia' },
+              { label: 'Gestão de Recursos Humanos', value: 'Gestão de Recursos Humanos' },
+              { label: 'História', value: 'História' },
+              { label: 'Jogos Digitais', value: 'Jogos Digitais' },
+              { label: 'Jornalismo', value: 'Jornalismo' },
+              { label: 'Marketing', value: 'Marketing' },
+              { label: 'Propaganda e Marketing', value: 'Propaganda e Marketing' },
+              { label: 'Sistemas de Informação', value: 'Sistemas de Informação' },
             ]"
+            @change="handleOnSelectCourse"
           />
         </div>
 
@@ -79,6 +101,7 @@
           class="q-courses-modal__listing-courses"
           :selected-vacancies="selectedVacancies"
           :sort="ascSort ? 'asc' : 'desc'"
+          :filter="filters"
           @change="handleOnChange"
         />
 
@@ -123,11 +146,29 @@ const props = defineProps({
 const selectedVacancies = ref<string[]>([]);
 // eslint-disable-next-line no-undef
 const ascSort = ref(true);
+// eslint-disable-next-line no-undef
+const selectedCity = ref<string>(undefined);
+// eslint-disable-next-line no-undef
+const selectedCourse = ref<string>(undefined);
+
+// eslint-disable-next-line no-undef
+const filters = computed(() => ({
+  'campus.city': selectedCity.value,
+  'course.name': selectedCourse.value,
+}));
 
 const emit = defineEmits(['close', 'save']);
 
 const handleSort = () => {
   ascSort.value = !ascSort.value;
+};
+
+const handleOnSelectCity = (city: string) => {
+  selectedCity.value = city;
+};
+
+const handleOnSelectCourse = (course: string) => {
+  selectedCourse.value = course;
 };
 
 const handleOnClose = () => emit('close');

@@ -31,7 +31,10 @@ defineProps({
     type: Array<{ label: string; value: string | number }>,
     default: () => [],
     validator: (value: Array<{ label: string; value: string | number }>) =>
-      !value.length || value.every(({ value, label }) => value && label),
+      !value.length || value.every(({ value, label }) =>
+        (typeof value === 'string' || typeof value === 'undefined') &&
+        (typeof label === 'string' || typeof label === 'undefined')
+      ),
   },
   label: {
     type: String,

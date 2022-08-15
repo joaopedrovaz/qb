@@ -72,12 +72,22 @@ const props = defineProps({
     default: 'asc',
     validator: (value: string) => ['asc', 'desc'].includes(value),
   },
+  filter: {
+    type: Object,
+    default: () => ({}),
+  },
 });
+
+// eslint-disable-next-line no-undef
+const filterMap = computed(
+  () => Object.fromEntries(Object.entries(props.filter).filter(([_, value]) => !!value)),
+);
 
 // eslint-disable-next-line no-undef
 const filters = computed(() => queryString.stringify({
   _sort: 'university.name',
   _order: props.sort,
+  ...filterMap.value,
 }));
 
 // eslint-disable-next-line no-undef
