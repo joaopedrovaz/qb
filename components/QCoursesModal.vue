@@ -30,6 +30,7 @@
           <QComboBox
             class="q-courses-modal__select-field"
             label="Selecione sua cidade"
+            :value="selectedCity"
             :options="[
               { label: undefined, value: undefined },
               { label: 'São Paulo', value: 'São Paulo' },
@@ -43,6 +44,7 @@
           <QComboBox
             class="q-courses-modal__select-field"
             label="Selecione o curso de sua preferência"
+            :value="selectedCourse"
             :options="[
               { label: undefined, value: undefined },
               { label: 'Administração', value: 'Administração' },

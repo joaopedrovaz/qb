@@ -12,6 +12,7 @@
       id="test"
       name="test"
       class="q-combo-box__select"
+      :value="value"
       @change="handleOnChange"
     >
       <option
@@ -27,6 +28,10 @@
 
 <script lang="ts" setup>
 defineProps({
+  value: {
+    type: String,
+    default: undefined,
+  },
   options: {
     type: Array<{ label: string; value: string | number }>,
     default: () => [],
