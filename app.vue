@@ -3,6 +3,7 @@
     <ClientOnly>
       <QHeader />
       <NuxtPage />
+      <QFooter />
     </ClientOnly>
   </div>
 </template>

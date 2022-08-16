@@ -28,7 +28,7 @@
 
         <div class="q-courses-modal__fields">
           <QComboBox
-            class="q-courses-modal__select-field"
+            class="q-courses-modal__field"
             label="Selecione sua cidade"
             :value="selectedCity"
             :options="[
@@ -42,13 +42,13 @@
           />
 
           <QComboBox
-            class="q-courses-modal__select-field"
+            class="q-courses-modal__field"
             label="Selecione o curso de sua preferência"
             :value="selectedCourse"
             :options="[
               { label: undefined, value: undefined },
               { label: 'Administração', value: 'Administração' },
-              { label: 'Arquitetura e urbanismo', value: 'Arquitetura e urbanismo' },
+              { label: 'Arquitetura e Urbanismo', value: 'Arquitetura e Urbanismo' },
               { label: 'Biomedicina', value: 'Biomedicina' },
               { label: 'Ciência da Computação', value: 'Ciência da Computação' },
               { label: 'Ciências Econômicas', value: 'Ciências Econômicas' },
@@ -297,7 +297,7 @@ onMounted(() => {
           flex-direction: row;
           flex-wrap: wrap;
 
-          .q-courses-modal__select-field {
+          .q-courses-modal__field {
             flex: 1;
           }
         }
